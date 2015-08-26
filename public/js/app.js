@@ -5,7 +5,7 @@ app.factory('FlashCardsFactory', function ($http) {
     return { 
         getFlashCards: function (category) {
             var config = {params: {}};
-            if (category) config = {params: {category: category}};
+            if (category && category != 'All') config = {params: {category: category}};
             return $http.get('/cards', config)
             .then(function (response) {
                 return response.data;
@@ -13,6 +13,21 @@ app.factory('FlashCardsFactory', function ($http) {
         },
     };
 });
+
+app.factory('ScoreFactory', function() {
+    return {
+        correct: 0,
+        incorrect: 0
+    };
+});
+
+
+app.controller('StatsController', function($scope, ScoreFactory) {
+    $scope.scores = ScoreFactory;
+})
+
+
+
 
 // app.value('whateverName', [
 //     {
