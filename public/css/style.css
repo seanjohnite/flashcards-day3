@@ -1,6 +1,12 @@
 * {
   box-sizing: border-box; }
 
+  .loader {
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+  }
+
 .category-button {
   border: 1px solid black;
   background: none;

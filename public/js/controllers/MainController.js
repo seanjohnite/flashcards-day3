@@ -2,9 +2,11 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
   // template definitions:
   $scope.stats = 'templates/stats.html';
   $scope.flashCard = 'templates/flashCard.html';
+  $scope.loading = true;
 
   FlashCardsFactory.getFlashCards()
   .then(function (flashCardsArray) {
+    $scope.loading = false;
     $scope.flashCards = flashCardsArray;
   });
 
@@ -21,9 +23,11 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
   $scope.cheatText = 'Enable';
 
   $scope.getCategoryCards = function (category) {
+    $scope.loading = true;
     $scope.currentCategory = category;
     FlashCardsFactory.getFlashCards(category)
     .then(function (flashCardsArray) {
+      $scope.loading = false;
       $scope.flashCards = flashCardsArray;
     });
   };

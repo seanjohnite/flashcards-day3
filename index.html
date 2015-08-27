@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Flash Cards</title>
-        <!-- We've provided some styles for you, aren't we nice? -->
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-    </head>
-    <body ng-app="flashCards">
-      <loader></loader>
-        <div ng-controller="MainController">
-            <div ng-include="stats"></div>
 
-            <button ng-repeat="category in categories" class="category-button"
-            ng-click="getCategoryCards(category)" ng-class="{active: category == currentCategory}">
-                {{ category }}
-            </button>
-            <button class="category-button" ng-click="toggleCheat()" ng-class="{active: cheatMode}">
-                {{ cheatText }} Cheat Mode
-            </button>
-            <div ng-include="flashCard"></div>
-        </div>
-    	<script src="js/lib/angular.js"></script>
-    	<script src="js/app.js"></script>
-        <script src="js/factories/FlashCardsFactory.js"></script>
-        <script src="js/factories/ScoreFactory.js"></script>
-    	<script src="js/controllers/MainController.js"></script>
-        <script src="js/controllers/FlashCardController.js"></script>
-        <script src="js/controllers/StatsController.js"></script>
-        <script src="js/directives/loader/loader.js"></script>
-    </body>
+<head>
+  <title>Flash Cards</title>
+  <!-- We've provided some styles for you, aren't we nice? -->
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body ng-app="flashCards">
+  <div ng-controller="MainController">
+
+    <div ng-include="stats"></div>
+
+    <button
+    ng-repeat="category in categories"
+    class="category-button"
+    ng-click="getCategoryCards(category)"
+    ng-class="{active: category == currentCategory}">
+      {{ category }}
+    </button>
+    <button
+    class="category-button"
+    ng-click="toggleCheat()"
+    ng-class="{active: cheatMode}">
+      {{ cheatText }} Cheat Mode
+    </button>
+    <flash-card
+    ng-repeat="flashCard in flashCards | orderBy : 'question'"
+    ng-show="!loading"></flash-card>
+    <loader ng-show="loading"></loader>
+  </div>
+  <script src="js/lib/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/factories/FlashCardsFactory.js"></script>
+  <script src="js/factories/ScoreFactory.js"></script>
+  <script src="js/controllers/MainController.js"></script>
+  <script src="js/controllers/StatsController.js"></script>
+  <script src="js/directives/loader/loader.js"></script>
+  <script src="js/directives/flashcards/flashcard.js"></script>
+</body>
+
 </html>

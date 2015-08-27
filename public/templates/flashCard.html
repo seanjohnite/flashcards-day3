@@ -6,7 +6,7 @@
     <h1>{{ flashCard.question | uppercase }}</h1>
     <ul class="flash-card-answers">
       <li ng-if="cheatMode"
-        ng-repeat="answer in flashCard.answers | cheatMode"
+        ng-repeat="answer in flashCard.answers | cheat"
         class="flash-card-answer"
         ng-click="answerQuestion(answer)">{{ answer.text }}</li>
       <li ng-if="!cheatMode"
@@ -21,5 +21,5 @@
         <span ng-show="answeredCorrectly">Yeah, you got it right!</span>
         <span ng-show="!answeredCorrectly">Nope, you got it wrong.</span>
     </h2>
-    
+
 </div>
