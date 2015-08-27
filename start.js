@@ -12,3 +12,7 @@ mongoose.connection.once('open', function () {
 	    console.log('Server started on port ' + PORT.toString());
 	});
 });
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 

@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body ng-app="flashCards">
+      <loader></loader>
         <div ng-controller="MainController">
             <div ng-include="stats"></div>
 
@@ -15,7 +16,7 @@
                 {{ category }}
             </button>
             <button class="category-button" ng-click="toggleCheat()" ng-class="{active: cheatMode}">
-                {{ cheatText }} Cheat Mode 
+                {{ cheatText }} Cheat Mode
             </button>
             <div ng-include="flashCard"></div>
         </div>
@@ -26,5 +27,6 @@
     	<script src="js/controllers/MainController.js"></script>
         <script src="js/controllers/FlashCardController.js"></script>
         <script src="js/controllers/StatsController.js"></script>
+        <script src="js/directives/loader/loader.js"></script>
     </body>
 </html>
