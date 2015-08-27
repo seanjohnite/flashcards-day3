@@ -1,8 +1,20 @@
 app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFactory) {
+  // template definitions:
+  $scope.stats = 'templates/stats.html';
+  $scope.flashCard = 'templates/flashCard.html';
+
   FlashCardsFactory.getFlashCards()
   .then(function (flashCardsArray) {
     $scope.flashCards = flashCardsArray;
   });
+
+  $scope.currentCard = 0;
+  $scope.goToNext = function (answeredCorrectly) {
+    if ($scope.currentCard === $scope.flashCards.length) {
+      console.log('hi tehre');
+      $scope.showScore = true;
+    }
+  };
 
   $scope.currentCategory = 'All';
   $scope.cheatMode = false;
@@ -14,12 +26,12 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
     .then(function (flashCardsArray) {
       $scope.flashCards = flashCardsArray;
     });
-  }
+  };
 
   $scope.toggleCheat = function() {
     $scope.cheatMode = $scope.cheatMode ? false : true;
     $scope.cheatText = $scope.cheatMode ? 'Disable' : 'Enable';
-  }
+  };
 
   $scope.categories = [
       'MongoDB',
@@ -29,20 +41,12 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
       'All'
   ];
 
-  $scope.answerQuestion = function (answer, flashCard) {
-    if (!flashCard.answered) {
-      flashCard.answered = true;
-      flashCard.answeredCorrectly = answer.correct;
-      flashCard.answeredCorrectly ? ScoreFactory.correct++ : ScoreFactory.incorrect++;
-    }
-  }
-
 });
 
 app.filter('cheat', function() {
   return function(answers) {
     return answers.filter(function (answer) {
       return answer.correct;
-    })
-  }
-})
+    });
+  };
+});

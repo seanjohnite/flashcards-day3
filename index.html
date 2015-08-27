@@ -7,8 +7,8 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body ng-app="flashCards">
-        <div ng-include="'templates/stats.html'"></div>
         <div ng-controller="MainController">
+            <div ng-include="stats"></div>
 
             <button ng-repeat="category in categories" class="category-button"
             ng-click="getCategoryCards(category)" ng-class="{active: category == currentCategory}">
@@ -17,40 +17,14 @@
             <button class="category-button" ng-click="toggleCheat()" ng-class="{active: cheatMode}">
                 {{ cheatText }} Cheat Mode 
             </button>
-            <div
-                ng-repeat="flashCard in flashCards | orderBy : 'question'"
-                class="flash-card">
-                <h3>{{ flashCard.category }}</h3>
-        	    <h1>{{ flashCard.question | uppercase }}</h1>
-        	    <ul class="flash-card-answers">
-        	    	<li ng-if="cheatMode"
-        	    		ng-repeat="answer in flashCard.answers | cheat"
-        	    		class="flash-card-answer"
-        	    		ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
-                    <li ng-if="!cheatMode"
-                        ng-repeat="answer in flashCard.answers"
-                        class="flash-card-answer"
-                        ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
-        	    </ul>
-        	    <h2
-        	    	class="answer-feedback"
-        	    	ng-class="flashCard.answeredCorrectly ? 'correct' : 'incorrect'"
-        	    	ng-show="flashCard.answered">
-        	        <span ng-show="flashCard.answeredCorrectly">Yeah, you got it right!</span>
-        	        <span ng-show="!flashCard.answeredCorrectly">Nope, you got it wrong.</span>
-        	    </h2>
-        	</div>
+            <div ng-include="flashCard"></div>
         </div>
     	<script src="js/lib/angular.js"></script>
     	<script src="js/app.js"></script>
         <script src="js/factories/FlashCardsFactory.js"></script>
         <script src="js/factories/ScoreFactory.js"></script>
-    	<script src="js/controllers/main.controller.js"></script>
-        <script src="js/controllers/stats.controller.js"></script>
-
-
-
-
-
+    	<script src="js/controllers/MainController.js"></script>
+        <script src="js/controllers/FlashCardController.js"></script>
+        <script src="js/controllers/StatsController.js"></script>
     </body>
 </html>
