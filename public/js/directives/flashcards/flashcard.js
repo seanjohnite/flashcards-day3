@@ -1,6 +1,5 @@
 app.directive('flashCard', function(ScoreFactory){
     function link (scope, element, attribute){
-      console.log('in link func!')
       scope.answerQuestion = function (answer) {
         if (!scope.answered) {
           scope.answered = true;
@@ -12,6 +11,9 @@ app.directive('flashCard', function(ScoreFactory){
     return {
       restrict: 'E',
       templateUrl: 'js/directives/flashcards/flashcard.html',
-      link: link
+      link: link,
+      scope: {
+        flashCard: "="
+      }
     }
 })

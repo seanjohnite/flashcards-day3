@@ -28,7 +28,8 @@
     </button>
     <flash-card
     ng-repeat="flashCard in flashCards | orderBy : 'question'"
-    ng-show="!loading"></flash-card>
+    ng-show="!loading"
+    flash-card="flashCard"></flash-card>
     <loader ng-show="loading"></loader>
   </div>
   <script src="js/lib/angular.js"></script>
@@ -39,6 +40,7 @@
   <script src="js/controllers/StatsController.js"></script>
   <script src="js/directives/loader/loader.js"></script>
   <script src="js/directives/flashcards/flashcard.js"></script>
+  <script src="js/directives/border-on-hover/border-on-hover.js"></script>
 </body>
 
 </html>
