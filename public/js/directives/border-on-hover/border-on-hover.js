@@ -1,13 +1,13 @@
 app.directive('borderOnHover', function () {
   
   function link(scope, element, attribute) {
+    var border;
     element.on('mouseenter', function () {
-      console.log('entered');
+      border = element.css('border');
       element.css('border', '2px solid black');
     });
     element.on('mouseleave', function () {
-      console.log('left');
-      element.css('border', '');
+      element.css('border', border);
     });
   }
 
